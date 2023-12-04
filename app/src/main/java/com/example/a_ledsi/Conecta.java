@@ -88,15 +88,6 @@ public class Conecta extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (isServiceBound) {
-            unbindService(serviceConnection);
-            isServiceBound = false;
-        }
-    }
-
     // Método para conectarse al dispositivo desde cualquier parte de tu actividad
     private void connectToDevice(BluetoothDevice device) {
         if (isServiceBound) {
