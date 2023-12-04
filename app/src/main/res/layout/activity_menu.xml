@@ -6,49 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".Menu">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="262dp"
-        android:layout_height="244dp"
-        android:layout_marginStart="148dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/robot1" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginEnd="10dp"
+        android:gravity="center">
 
-    <Button
-        android:id="@+id/btnConectar"
-        android:layout_width="344dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="35dp"
-        android:text="Conectar con sistema Ledsi"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blueLedSi"
+            android:textSize="40sp"
+            android:layout_margin="10dp"
+            android:text="Elije una opción:"/>
 
-    <Button
-        android:id="@+id/btnSubir"
-        android:layout_width="344dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="35dp"
-        android:text="Subir o actualizar imagen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnConectar" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            android:background="@drawable/border_linear"
+            android:gravity="center">
 
-    <Button
-        android:id="@+id/btnHabilitar"
-        android:layout_width="344dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="35dp"
-        android:text="Habilitar Sonido"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSubir" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="262dp"
+                android:layout_height="244dp"
+                android:layout_gravity="end"
+                app:srcCompat="@drawable/robot1" />
+
+            <Button
+                android:id="@+id/btnConectar"
+                android:layout_width="280dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="15dp"
+                android:text="Conectar con sistema Ledsi" />
+
+            <Button
+                android:id="@+id/btnSubir"
+                android:layout_width="280dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="15dp"
+                android:text="Subir o actualizar imagen" />
+
+            <LinearLayout
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="50dp"
+                android:background="@color/blueLedSi">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="HABILITAR SONIDO"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <Switch
+                    android:id="@+id/switchPanel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="10dp"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

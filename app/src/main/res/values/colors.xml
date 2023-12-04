@@ -2,4 +2,8 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="blueLedSi">#0048A7</color>
+    <color name="blueLedSi_Variant">#76A3D1</color>
+    <color name="greenLedSi">#ADFFFB</color>
+    <color name="greenLedSi_Variant">#B8FFFF</color>
 </resources>
