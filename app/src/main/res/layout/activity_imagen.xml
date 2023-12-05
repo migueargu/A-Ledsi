@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Imagen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginEnd="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="305dp"
+            android:layout_height="wrap_content"
+            android:text="Selecciona una imagen:"
+            android:textColor="@color/blueLedSi"
+            android:textSize="40sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="15dp"
+            android:background="@drawable/border_linear"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="101dp"
+                android:layout_height="92dp"
+                android:layout_gravity="end"
+                app:srcCompat="@drawable/robot2" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="15dp"
+                android:gravity="center">
+
+
+                <TextView
+                    android:id="@+id/status"
+                    android:background="@drawable/border_lineart_text"
+                    android:layout_width="189dp"
+                    android:layout_height="37dp"
+                    android:text="Imagen"
+                    android:textSize="15sp"
+                    android:textAlignment="center"
+                    android:textStyle="italic" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="Buscar" />
+
+            </LinearLayout>
+
+
+            <ListView
+                android:id="@+id/listviewImg"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginBottom="30dp"
+                android:background="@android:color/darker_gray" />
+        </LinearLayout>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
