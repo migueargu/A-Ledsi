@@ -10,12 +10,15 @@ import android.os.Binder;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 public class BluetoothConnectionManager extends Service {
     private static final UUID MY_UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -71,6 +74,7 @@ public class BluetoothConnectionManager extends Service {
                 socket.connect();
                 Message message = Message.obtain();
                 message.what = STATE_CONNECTED;
+                Log.e("ClienteClass","ClienteClass dice: STATE_CONNECTED");
                 handler.sendMessage(message);
 
                 sendReceive = new SendReceive(socket);
@@ -80,6 +84,7 @@ public class BluetoothConnectionManager extends Service {
                 e.printStackTrace();
                 Message message = Message.obtain();
                 message.what = STATE_CONNECTION_FAILED;
+                Log.e("ClienteClass","ClienteClass dice: STATE_CONNECTION_FAILED");
                 handler.sendMessage(message);
             }
         }
