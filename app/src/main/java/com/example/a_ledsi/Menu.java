@@ -10,19 +10,25 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Menu extends AppCompatActivity {
 
+    Button btnConecta, btnExit;
     Button btnConecta, btnSubir;
     Switch swtPanel;
+    FirebaseAuth mAuth;
     BluetoothConnectionManager bluetoothManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        mAuth=FirebaseAuth.getInstance();
 
         btnConecta = (Button) findViewById(R.id.btnConectar);
         swtPanel = (Switch) findViewById(R.id.switchPanel);
+        btnExit=(Button)findViewById(R.id.btnSalir);
         btnSubir = (Button) findViewById(R.id.btnSubir);
 
         btnConecta.setOnClickListener(new View.OnClickListener() {
@@ -60,5 +66,23 @@ public class Menu extends AppCompatActivity {
                 }
             }
         });
+
+        btnExit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                mAuth.signOut();
+                finish();
+                startActivity(new Intent(Menu.this, login.class));
+            }
+        });
     }
+
+
+
+
+
+
 }
+
+}
+
