@@ -8,19 +8,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Menu extends AppCompatActivity {
 
-    Button btnConecta;
+    Button btnConecta, btnExit;
     Switch swtPanel;
+    FirebaseAuth mAuth;
     BluetoothConnectionManager bluetoothManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        mAuth=FirebaseAuth.getInstance();
 
         btnConecta = (Button)findViewById(R.id.btnConectar);
         swtPanel = (Switch) findViewById(R.id.switchPanel);
+        btnExit=(Button)findViewById(R.id.btnSalir);
 
         btnConecta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,5 +43,19 @@ public class Menu extends AppCompatActivity {
                 //msg_box.setText("Sensor " + (send.isChecked() ? "encendido" : "apagado"));
             }
         });
+
+        btnExit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                mAuth.signOut();
+                finish();
+                startActivity(new Intent(Menu.this, login.class));
+            }
+        });
     }
+
+
+
+
+
 }
