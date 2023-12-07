@@ -37,40 +37,30 @@ import java.util.UUID;
 
 public class Conecta extends AppCompatActivity {
     private static final int REQUEST_BLUETOOTH_CONNECT = 123;
-    Button listen, listDevices;
-    Switch send;
+    Button  listDevices;
     ListView listView;
-    TextView msg_box, status;
+    TextView status;
     BluetoothAdapter bluetoothAdapter;
     BluetoothDevice[] btArray;
     int REQUEST_ENABLE_BLUETOOTH = 1;
     BluetoothConnectionManager bluetoothManager;
-    private boolean isServiceBound = false;
 
-    private ServiceConnection serviceConnection = new ServiceConnection() {
-        @Override
-        public void onServiceConnected(ComponentName name, IBinder service) {
-            BluetoothConnectionManager.LocalBinder binder = (BluetoothConnectionManager.LocalBinder) service;
-            bluetoothManager = binder.getService();
-            isServiceBound = true;
-        }
 
-        @Override
-        public void onServiceDisconnected(ComponentName name) {
-            isServiceBound = false;
-        }
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conecta);
-
         findViewByIdes();
+
+        bluetoothManager = BluetoothConnectionHolder.getBluetoothManager();
+        if (bluetoothManager != null) {
+            status.setText("¡Conectado!");
+        } else {
+
+        }
+
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         bluetoothManager = new BluetoothConnectionManager();
-
-        Intent serviceIntent = new Intent(this, BluetoothConnectionManager.class);
-        bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
 
         if (bluetoothAdapter == null) {
         } else if (!bluetoothAdapter.isEnabled()) {
@@ -85,50 +75,6 @@ public class Conecta extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{android.Manifest.permission.BLUETOOTH_CONNECT},
                     REQUEST_BLUETOOTH_CONNECT);
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (isServiceBound) {
-            unbindService(serviceConnection);
-            isServiceBound = false;
-        }
-    }
-
-    // Método para conectarse al dispositivo desde cualquier parte de tu actividad
-    private void connectToDevice(BluetoothDevice device) {
-        if (isServiceBound) {
-            bluetoothManager.connectToDevice(device, new Handler() {
-                @Override
-                public void handleMessage(Message msg) {
-                    // Manejar mensajes según sea necesario
-                    switch (msg.what) {
-                        case BluetoothConnectionManager.STATE_CONNECTED:
-                            // El dispositivo se ha conectado exitosamente
-                            showToast("Connected to the device");
-                            break;
-                        case BluetoothConnectionManager.STATE_CONNECTION_FAILED:
-                            // La conexión ha fallado
-                            showToast("Connection failed");
-                            break;
-                        // Otros casos según tus necesidades
-                    }
-                }
-            });
-        }
-    }
-
-    // Método para mostrar un Toast (mensaje emergente)
-    private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    // Método para enviar mensajes desde cualquier parte de tu actividad
-    private void sendMessage(String message) {
-        if (isServiceBound) {
-            bluetoothManager.sendMessage(message);
         }
     }
 
@@ -189,52 +135,34 @@ public class Conecta extends AppCompatActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                //ClientClass clientClass=new ClientClass(btArray[i]);
-                //clientClass.start();
                 bluetoothManager.connectToDevice(btArray[i], handler);
+                BluetoothConnectionHolder.setBluetoothManager(bluetoothManager);
 
                 status.setText("Conectando...");
             }
         });
 
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String message = send.isChecked() ? "ON" : "OFF";
-                bluetoothManager.sendMessage(message);
-                msg_box.setText("Sensor " + (send.isChecked() ? "encendido" : "apagado"));
-            }
-        });
+
     }
 
     private void findViewByIdes() {
-        send = (Switch) findViewById(R.id.switchButtonSensor);
         listView = (ListView) findViewById(R.id.listview);
         status = (TextView) findViewById(R.id.status);
         listDevices = (Button) findViewById(R.id.listDevices);
-        msg_box = (TextView) findViewById(R.id.msg);
     }
 
     Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
-                case BluetoothConnectionManager.STATE_LISTENING:
-                    status.setText("Listening");
-                    break;
                 case BluetoothConnectionManager.STATE_CONNECTING:
-                    status.setText("Connecting");
+                    status.setText("Conectando...");
                     break;
                 case BluetoothConnectionManager.STATE_CONNECTED:
-                    status.setText("Connected");
+                    status.setText("¡Conectado!");
                     break;
                 case BluetoothConnectionManager.STATE_CONNECTION_FAILED:
-                    status.setText("Connection Failed");
-                    break;
-                case BluetoothConnectionManager.STATE_MESSAGE_RECEIVED:
-                    byte[] readBuff = (byte[]) msg.obj;
-                    String tempMsg = new String(readBuff, 0, msg.arg1);
-                    msg_box.setText(tempMsg);
+                    status.setText("¡La conexión falló!");
                     break;
             }
             return true;
