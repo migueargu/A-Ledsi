@@ -15,7 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class Menu extends AppCompatActivity {
 
     Button btnConecta, btnExit;
-    Button btnConecta, btnSubir;
+    Button btnSubir;
     Switch swtPanel;
     FirebaseAuth mAuth;
     BluetoothConnectionManager bluetoothManager;
@@ -84,5 +84,5 @@ public class Menu extends AppCompatActivity {
 
 }
 
-}
+
 
