@@ -3,10 +3,12 @@ package com.example.a_ledsi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -14,8 +16,8 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Menu extends AppCompatActivity {
 
-    Button btnConecta, btnExit;
-    Button btnSubir;
+    Button btnConecta, btnExit, btnSubir;
+    LinearLayout lnySonido;
     Switch swtPanel;
     FirebaseAuth mAuth;
     BluetoothConnectionManager bluetoothManager;
@@ -30,6 +32,21 @@ public class Menu extends AppCompatActivity {
         swtPanel = (Switch) findViewById(R.id.switchPanel);
         btnExit=(Button)findViewById(R.id.btnSalir);
         btnSubir = (Button) findViewById(R.id.btnSubir);
+        lnySonido = (LinearLayout) findViewById(R.id.btnHabSonido);
+
+        bluetoothManager = BluetoothConnectionHolder.getBluetoothManager();
+        if (bluetoothManager != null) {
+            btnSubir.setEnabled(true);
+            swtPanel.setEnabled(true);
+            lnySonido.setEnabled(true);
+
+        } else {
+            btnSubir.setEnabled(false);
+            swtPanel.setEnabled(false);
+            if (lnySonido != null) {
+                lnySonido.setBackgroundColor(Color.DKGRAY);
+            }
+        }
 
         btnConecta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,12 +93,6 @@ public class Menu extends AppCompatActivity {
             }
         });
     }
-
-
-
-
-
-
 }
 
 
