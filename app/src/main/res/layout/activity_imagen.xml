@@ -36,39 +36,12 @@
                 android:layout_gravity="end"
                 app:srcCompat="@drawable/robot2" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp"
-                android:gravity="center">
-
-
-                <TextView
-                    android:id="@+id/status"
-                    android:background="@drawable/border_lineart_text"
-                    android:layout_width="189dp"
-                    android:layout_height="37dp"
-                    android:text="Imagen"
-                    android:textSize="15sp"
-                    android:textAlignment="center"
-                    android:textStyle="italic" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:text="Buscar" />
-
-            </LinearLayout>
-
-
             <ListView
                 android:id="@+id/listviewImg"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginStart="50dp"
+                android:layout_marginEnd="30dp"
+                android:layout_marginStart="30dp"
                 android:layout_marginBottom="30dp"
                 android:background="@android:color/darker_gray" />
         </LinearLayout>
